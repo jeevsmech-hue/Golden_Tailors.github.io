@@ -87,6 +87,119 @@
     }
     .nav-cta:hover { background: var(--gold); color: var(--green-deep); }
 
+    /* ─── PROMO BANNER (Attractive advertisement at the very top) ─── */
+    .promo-banner {
+      background: linear-gradient(90deg, #0D2818, #1E4D2C);
+      padding: 22px 56px;
+      position: relative;
+      z-index: 90;
+      border-bottom: 2px solid var(--cream-border);
+      box-shadow: 0 4px 20px rgba(200,169,81,0.1);
+      overflow: hidden;
+    }
+    .promo-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 50%, rgba(200,169,81,0.12) 0%, transparent 70%);
+      pointer-events: none;
+      animation: shimmer 8s linear infinite;
+    }
+    @keyframes shimmer {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+    .promo-content {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+    .promo-left {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex: 1;
+      min-width: 280px;
+    }
+    .promo-badge {
+      background: var(--gold);
+      color: var(--green-deep);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 50px;
+      white-space: nowrap;
+      box-shadow: 0 2px 8px rgba(200,169,81,0.3);
+    }
+    .promo-text {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 2.8vw, 28px);
+      font-weight: 400;
+      line-height: 1.25;
+      color: var(--cream);
+    }
+    .promo-text em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+    .promo-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .promo-tag {
+      font-size: 13px;
+      color: var(--gold-dim);
+      background: rgba(245,237,214,0.08);
+      border: 1px solid rgba(200,169,81,0.25);
+      padding: 6px 14px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .promo-cta {
+      background: var(--gold);
+      color: var(--green-deep);
+      border: none;
+      padding: 14px 32px;
+      font-family: var(--font-body);
+      font-size: 12.5px;
+      font-weight: 500;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 12px rgba(200,169,81,0.25);
+    }
+    .promo-cta:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(200,169,81,0.35);
+    }
+    .promo-cta-secondary {
+      background: transparent;
+      color: var(--cream);
+      border: 1px solid var(--gold-light);
+      padding: 14px 28px;
+      font-size: 12.5px;
+      font-weight: 400;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: all 0.25s;
+    }
+    .promo-cta-secondary:hover {
+      background: rgba(200,169,81,0.1);
+      color: var(--gold-light);
+    }
+
     /* ─── HERO ─── */
     .hero {
       position: relative; z-index: 1;
@@ -480,6 +593,9 @@
       .divider { padding: 32px 20px; }
       footer { padding: 48px 20px 24px; }
       .footer-top { gap: 32px; }
+      .promo-banner { padding: 18px 20px; }
+      .promo-content { flex-direction: column; text-align: center; gap: 16px; }
+      .promo-right { justify-content: center; }
     }
   </style>
 </head>
@@ -499,6 +615,33 @@
   </ul>
   <a href="#booking" class="nav-cta">Book appointment</a>
 </nav>
+
+<!-- ATTRACTIVE ADVERTISEMENT BANNER (placed right after nav, at the top of the page) -->
+<section class="promo-banner" id="summer-classes">
+  <div class="promo-content">
+    <div class="promo-left">
+      <div class="promo-badge">SUMMER 2026 • NOW OPEN FOR REGISTRATION</div>
+      <div class="promo-text">
+        Summer Stitching Classes are here!<br>
+        <em>Master the golden art of tailoring &amp; embroidery</em>
+      </div>
+    </div>
+
+    <div class="promo-right">
+      <div class="promo-tag">4-week intensive</div>
+      <div class="promo-tag">Hands-on workshops</div>
+      <div class="promo-tag">Certificate awarded</div>
+      <div class="promo-tag">Limited to 12 students</div>
+
+      <a href="#booking" onclick="document.getElementById('f-service').value='Summer Stitching Class (June 2026)'" class="promo-cta">
+        Enroll Now – Only 8 seats left
+      </a>
+      <a href="#booking" class="promo-cta-secondary">
+        View full schedule
+      </a>
+    </div>
+  </div>
+</section>
 
 <!-- HERO -->
 <section class="hero">
@@ -648,6 +791,7 @@
           <option>Bridal & special wear</option>
           <option>Uniform / bulk order</option>
           <option>Designer design</option>
+          <option>Summer Stitching Class (June 2026)</option>
         </select>
       </div>
       <div class="form-row">
