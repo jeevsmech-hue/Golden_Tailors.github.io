@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Golden Tailors – Karamadai, Coimbatore</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --green-deep:   #061510;
+      --green-dark:   #0D2818;
+      --green-mid:    #163820;
+      --green-soft:   #1E4D2C;
+      --green-muted:  #2A6040;
+      --gold:         #C8A951;
+      --gold-light:   #E2C97A;
+      --gold-pale:    #F5EDD6;
+      --gold-dim:     #8A7235;
+      --cream:        #F5EDD6;
+      --cream-muted:  rgba(245,237,214,0.6);
+      --cream-faint:  rgba(245,237,214,0.12);
+      --cream-border: rgba(200,169,81,0.2);
+      --font-display: 'Cormorant Garamond', serif;
+      --font-body:    'Jost', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--green-dark);
+      color: var(--cream);
+      overflow-x: hidden;
+    }
+
+    /* ─── TEXTURE OVERLAY ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(200,169,81,0.015) 40px, rgba(200,169,81,0.015) 41px),
+        repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(200,169,81,0.015) 40px, rgba(200,169,81,0.015) 41px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 56px;
+      background: rgba(6,21,16,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--cream-border);
+    }
+    .nav-logo { text-decoration: none; }
+    .nav-logo-name {
+      font-family: var(--font-display);
+      font-size: 22px; font-weight: 500;
+      color: var(--gold); letter-spacing: 2px;
+    }
+    .nav-logo-sub {
+      font-size: 9px; color: var(--cream-muted);
+      letter-spacing: 3px; text-transform: uppercase; display: block;
+      margin-top: 1px;
+    }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      font-size: 12px; font-weight: 400;
+      color: var(--cream-muted); text-decoration: none;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      background: transparent;
+      color: var(--gold);
+      border: 1px solid var(--gold-dim);
+      padding: 10px 24px;
+      font-family: var(--font-body);
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      cursor: pointer; text-decoration: none;
+      transition: all 0.25s;
+    }
+    .nav-cta:hover { background: var(--gold); color: var(--green-deep); }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative; z-index: 1;
+      min-height: 92vh;
+      display: flex; align-items: center;
+      padding: 80px 56px;
+      overflow: hidden;
+    }
+    .hero-bg-text {
+      position: absolute;
+      right: -60px; top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--font-display);
+      font-size: 380px; font-weight: 600;
+      color: rgba(200,169,81,0.04);
+      pointer-events: none; user-select: none;
+      line-height: 1;
+    }
+    .hero-ornament {
+      position: absolute; top: 48px; right: 56px;
+      width: 280px; height: 280px;
+      border: 1px solid var(--cream-border);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero-ornament::before {
+      content: '';
+      position: absolute; inset: 20px;
+      border: 1px solid rgba(200,169,81,0.1);
+      border-radius: 50%;
+    }
+    .hero-ornament::after {
+      content: '';
+      position: absolute; inset: 40px;
+      border: 1px solid rgba(200,169,81,0.06);
+      border-radius: 50%;
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 640px; }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 12px;
+      margin-bottom: 32px;
+    }
+    .hero-line { width: 40px; height: 1px; background: var(--gold); }
+    .hero-eyebrow span {
+      font-size: 10px; font-weight: 400;
+      letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(52px, 7vw, 88px);
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1.05;
+      margin-bottom: 28px;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold);
+      font-weight: 400;
+    }
+    .hero-sub {
+      font-size: 15px; font-weight: 300;
+      color: var(--cream-muted);
+      line-height: 1.8;
+      margin-bottom: 48px;
+      max-width: 480px;
+    }
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-gold {
+      background: var(--gold);
+      color: var(--green-deep);
+      border: none;
+      padding: 15px 36px;
+      font-family: var(--font-body);
+      font-size: 12px; font-weight: 500;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      cursor: pointer; text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-gold:hover { background: var(--gold-light); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--cream);
+      border: 1px solid var(--cream-border);
+      padding: 15px 36px;
+      font-family: var(--font-body);
+      font-size: 12px; font-weight: 400;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      cursor: pointer; text-decoration: none;
+      display: inline-block;
+      transition: all 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+    .hero-stats {
+      display: flex; gap: 0;
+      margin-top: 64px;
+      border-top: 1px solid var(--cream-border);
+      padding-top: 32px;
+    }
+    .hero-stat { flex: 1; padding-right: 32px; border-right: 1px solid var(--cream-border); margin-right: 32px; }
+    .hero-stat:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+    .hero-stat-num {
+      font-family: var(--font-display);
+      font-size: 36px; font-weight: 500;
+      color: var(--gold); line-height: 1;
+      margin-bottom: 4px;
+    }
+    .hero-stat-label { font-size: 11px; color: var(--cream-muted); letter-spacing: 1px; }
+
+    /* ─── SECTION COMMON ─── */
+    section { position: relative; z-index: 1; padding: 96px 56px; }
+    .s-eyebrow {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 16px;
+    }
+    .s-eyebrow .line { width: 32px; height: 1px; background: var(--gold); }
+    .s-eyebrow span {
+      font-size: 10px; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--gold); font-weight: 400;
+    }
+    .s-title {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 300; color: var(--cream);
+      line-height: 1.15; margin-bottom: 48px;
+    }
+    .s-title em { font-style: italic; color: var(--gold); }
+
+    /* ─── SERVICES ─── */
+    .services { background: var(--green-mid); }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1px;
+      background: var(--cream-border);
+      border: 1px solid var(--cream-border);
+    }
+    .service-card {
+      background: var(--green-mid);
+      padding: 36px 28px;
+      transition: background 0.25s;
+    }
+    .service-card:hover { background: var(--green-soft); }
+    .svc-num {
+      font-family: var(--font-display);
+      font-size: 48px; font-weight: 300;
+      color: rgba(200,169,81,0.15);
+      line-height: 1; margin-bottom: 20px;
+    }
+    .service-card h3 {
+      font-family: var(--font-display);
+      font-size: 22px; font-weight: 400;
+      color: var(--gold-light);
+      margin-bottom: 10px;
+    }
+    .service-card p { font-size: 13px; font-weight: 300; color: var(--cream-muted); line-height: 1.7; }
+    .svc-tag {
+      display: inline-block; margin-top: 16px;
+      font-size: 9px; letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      border-bottom: 1px solid var(--gold-dim);
+      padding-bottom: 2px;
+    }
+
+    /* ─── DIVIDER ─── */
+    .divider {
+      padding: 48px 56px;
+      background: var(--green-deep);
+      display: flex; align-items: center; gap: 0;
+      overflow: hidden;
+    }
+    .divider-text {
+      font-family: var(--font-display);
+      font-size: clamp(24px, 3vw, 38px);
+      font-weight: 300; font-style: italic;
+      color: var(--cream-muted);
+      white-space: nowrap;
+      animation: marquee 18s linear infinite;
+    }
+    .divider-text span { color: var(--gold); margin: 0 32px; }
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ─── BOOKING ─── */
+    .booking { background: var(--green-dark); }
+    .booking-inner { display: flex; gap: 72px; flex-wrap: wrap; }
+    .booking-left { flex: 1; min-width: 260px; }
+    .booking-left p {
+      font-size: 14px; font-weight: 300;
+      color: var(--cream-muted); line-height: 1.8;
+      margin-bottom: 36px; max-width: 400px;
+    }
+    .contact-item {
+      display: flex; align-items: flex-start; gap: 16px;
+      margin-bottom: 20px;
+    }
+    .c-icon {
+      width: 36px; height: 36px; flex-shrink: 0;
+      border: 1px solid var(--cream-border);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .contact-item .c-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 4px; }
+    .contact-item .c-val { font-size: 14px; color: var(--cream); font-weight: 300; }
+    .contact-item a { color: var(--gold-light); text-decoration: none; }
+    .wa-btn {
+      display: inline-flex; align-items: center; gap: 12px;
+      background: rgba(37,211,102,0.1);
+      border: 1px solid rgba(37,211,102,0.3);
+      color: #4ade80;
+      padding: 13px 28px; margin-top: 24px;
+      font-family: var(--font-body);
+      font-size: 12px; font-weight: 400;
+      letter-spacing: 1px; text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .wa-btn:hover { background: rgba(37,211,102,0.18); }
+
+    .booking-right { flex: 1; min-width: 300px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label {
+      display: block; font-size: 9px;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gold-dim); margin-bottom: 8px; font-weight: 400;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%; padding: 13px 16px;
+      background: var(--cream-faint);
+      border: 1px solid var(--cream-border);
+      color: var(--cream);
+      font-family: var(--font-body);
+      font-size: 13px; font-weight: 300;
+      outline: none;
+      transition: border-color 0.2s;
+      border-radius: 0;
+      -webkit-appearance: none;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(245,237,214,0.3); }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--gold-dim); }
+    .form-group select option { background: var(--green-dark); color: var(--cream); }
+    .submit-btn {
+      width: 100%;
+      background: var(--gold);
+      color: var(--green-deep);
+      border: none; padding: 16px;
+      font-family: var(--font-body);
+      font-size: 12px; font-weight: 500;
+      letter-spacing: 2px; text-transform: uppercase;
+      cursor: pointer; margin-top: 8px;
+      transition: background 0.2s;
+    }
+    .submit-btn:hover { background: var(--gold-light); }
+    .form-msg {
+      display: none; margin-top: 12px;
+      padding: 12px 16px;
+      font-size: 12px; text-align: center;
+      letter-spacing: 0.5px;
+    }
+
+    /* ─── REVIEWS ─── */
+    .reviews { background: var(--green-mid); }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+    .review-card {
+      background: var(--green-dark);
+      border: 1px solid var(--cream-border);
+      padding: 32px 28px;
+      position: relative;
+    }
+    .review-quote {
+      font-family: var(--font-display);
+      font-size: 64px; font-weight: 300;
+      color: var(--gold-dim);
+      line-height: 0.5;
+      margin-bottom: 16px;
+    }
+    .stars { color: var(--gold); font-size: 13px; margin-bottom: 16px; letter-spacing: 2px; }
+    .review-card p {
+      font-size: 14px; font-weight: 300;
+      font-style: italic;
+      color: var(--cream-muted); line-height: 1.75;
+      margin-bottom: 20px;
+    }
+    .review-name { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
+    .review-loc { font-size: 11px; color: var(--cream-muted); margin-top: 2px; }
+
+    /* ─── FIND US ─── */
+    .find-us { background: var(--green-deep); text-align: center; }
+    .find-us p {
+      font-size: 15px; font-weight: 300;
+      color: var(--cream-muted); margin-bottom: 40px; line-height: 1.7;
+    }
+    .social-btns { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+    .s-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 13px 28px;
+      font-family: var(--font-body);
+      font-size: 11px; font-weight: 400;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid;
+      transition: all 0.2s;
+    }
+    .s-btn-ig { color: #e879a0; border-color: rgba(232,121,160,0.3); background: rgba(232,121,160,0.06); }
+    .s-btn-ig:hover { background: rgba(232,121,160,0.14); }
+    .s-btn-map { color: #7bb3f0; border-color: rgba(123,179,240,0.3); background: rgba(123,179,240,0.06); }
+    .s-btn-map:hover { background: rgba(123,179,240,0.14); }
+    .s-btn-call { color: var(--gold-light); border-color: var(--cream-border); background: var(--cream-faint); }
+    .s-btn-call:hover { background: rgba(200,169,81,0.12); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--green-deep);
+      border-top: 1px solid var(--cream-border);
+      padding: 64px 56px 32px;
+    }
+    .footer-top { display: flex; gap: 56px; flex-wrap: wrap; margin-bottom: 48px; }
+    .footer-brand { flex: 2; min-width: 220px; }
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 28px; font-weight: 400;
+      color: var(--gold); letter-spacing: 2px;
+      margin-bottom: 4px;
+    }
+    .footer-logo-sub {
+      font-size: 9px; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--cream-muted);
+      margin-bottom: 16px;
+    }
+    .footer-brand p { font-size: 13px; font-weight: 300; color: rgba(245,237,214,0.4); line-height: 1.75; }
+    .footer-col { flex: 1; min-width: 140px; }
+    .footer-col h4 {
+      font-size: 9px; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--gold-dim);
+      font-weight: 400; margin-bottom: 20px;
+    }
+    .footer-col a {
+      display: block; font-size: 13px; font-weight: 300;
+      color: rgba(245,237,214,0.45); margin-bottom: 10px;
+      text-decoration: none; transition: color 0.2s;
+    }
+    .footer-col a:hover { color: var(--gold-light); }
+    .footer-bottom {
+      border-top: 1px solid rgba(200,169,81,0.1);
+      padding-top: 24px;
+      display: flex; justify-content: space-between;
+      flex-wrap: wrap; gap: 8px;
+    }
+    .footer-bottom p { font-size: 11px; color: rgba(245,237,214,0.2); letter-spacing: 0.5px; }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-content > * {
+      animation: fadeUp 0.7s ease both;
+    }
+    .hero-eyebrow { animation-delay: 0.1s; }
+    .hero h1       { animation-delay: 0.25s; }
+    .hero-sub      { animation-delay: 0.4s; }
+    .hero-btns     { animation-delay: 0.55s; }
+    .hero-stats    { animation-delay: 0.7s; }
+
+    /* ─── MOBILE ─── */
+    @media (max-width: 768px) {
+      nav { padding: 14px 20px; }
+      .nav-links { display: none; }
+      section { padding: 64px 20px; }
+      .hero { padding: 60px 20px; min-height: auto; }
+      .hero-ornament { display: none; }
+      .hero-bg-text { font-size: 200px; right: -40px; }
+      .hero-stats { flex-direction: column; gap: 20px; }
+      .hero-stat { border-right: none; margin-right: 0; padding-right: 0; border-bottom: 1px solid var(--cream-border); padding-bottom: 20px; }
+      .hero-stat:last-child { border-bottom: none; padding-bottom: 0; }
+      .form-row { grid-template-columns: 1fr; }
+      .divider { padding: 32px 20px; }
+      footer { padding: 48px 20px 24px; }
+      .footer-top { gap: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-name">Golden Tailors</div>
+    <span class="nav-logo-sub">Karamadai · Coimbatore</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#booking">Book</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#find-us">Find us</a></li>
+  </ul>
+  <a href="#booking" class="nav-cta">Book appointment</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-text">GT</div>
+  <div class="hero-ornament"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <div class="hero-line"></div>
+      <span>20+ years of craftsmanship</span>
+    </div>
+    <h1>Stitched with<br><em>golden</em><br>precision.</h1>
+    <p class="hero-sub">From custom stitching to intricate embroidery — Golden Tailors brings precision and artistry to every garment. Proudly serving Karamadai and Coimbatore since day one.</p>
+    <div class="hero-btns">
+      <a href="#booking" class="btn-gold">Book a fitting</a>
+      <a href="#services" class="btn-ghost">Our services</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">500+</div>
+        <div class="hero-stat-label">Happy customers</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">20+</div>
+        <div class="hero-stat-label">Years experience</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">100%</div>
+        <div class="hero-stat-label">Fit guarantee</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">3 days</div>
+        <div class="hero-stat-label">Express delivery</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="s-eyebrow"><div class="line"></div><span>What we offer</span></div>
+  <div class="s-title">Our <em>services</em></div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="svc-num">01</div>
+      <h3>Custom Stitching</h3>
+      <p>Tailored from scratch to your exact measurements and design preferences. Every stitch placed with care.</p>
+      <span class="svc-tag">Made to measure</span>
+    </div>
+    <div class="service-card">
+      <div class="svc-num">02</div>
+      <h3>Embroidery</h3>
+      <p>Intricate hand and machine embroidery to elevate any outfit. Gold, silk, and thread work available.</p>
+      <span class="svc-tag">Hand & machine</span>
+    </div>
+    <div class="service-card">
+      <div class="svc-num">03</div>
+      <h3>Alterations & Repairs</h3>
+      <p>Fast, precise alterations and repairs to give your garments a perfect new life. Same-day available.</p>
+      <span class="svc-tag">Express available</span>
+    </div>
+    <div class="service-card">
+      <div class="svc-num">04</div>
+      <h3>Bridal & Special Wear</h3>
+      <p>Luxurious bridal and occasion outfits crafted with care and devotion for your most important day.</p>
+      <span class="svc-tag">Your big day</span>
+    </div>
+    <div class="service-card">
+      <div class="svc-num">05</div>
+      <h3>Designer Designs</h3>
+      <p>Bring your fashion inspirations to life with expert design consultation and skilled execution.</p>
+      <span class="svc-tag">Any vision</span>
+    </div>
+    <div class="service-card">
+      <div class="svc-num">06</div>
+      <h3>Uniform & Bulk Orders</h3>
+      <p>Consistent precision stitching for schools, offices, and corporate uniforms. Volume pricing available.</p>
+      <span class="svc-tag">Bulk pricing</span>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE DIVIDER -->
+<div class="divider">
+  <div class="divider-text">
+    Custom Stitching <span>✦</span> Embroidery <span>✦</span> Bridal Wear <span>✦</span> Alterations <span>✦</span> Designer Designs <span>✦</span> Bulk Orders <span>✦</span>&nbsp;
+    Custom Stitching <span>✦</span> Embroidery <span>✦</span> Bridal Wear <span>✦</span> Alterations <span>✦</span> Designer Designs <span>✦</span> Bulk Orders <span>✦</span>&nbsp;
+  </div>
+</div>
+
+<!-- BOOKING -->
+<section class="booking" id="booking">
+  <div class="s-eyebrow"><div class="line"></div><span>Get in touch</span></div>
+  <div class="s-title">Book your <em>appointment</em></div>
+  <div class="booking-inner">
+    <div class="booking-left">
+      <p>Walk in or fill the form — we'll make sure your garment is ready when you need it. Every appointment gets personal attention from our master tailors.</p>
+      <div class="contact-item">
+        <div class="c-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C8A951" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div>
+          <div class="c-label">Address</div>
+          <div class="c-val">Mullai Garden, Karamadai<br>Coimbatore – 641104</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="c-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C8A951" stroke-width="1.5"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+        </div>
+        <div>
+          <div class="c-label">Phone</div>
+          <div class="c-val"><a href="tel:+919751688911">+91 97516 88911</a></div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="c-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C8A951" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <div>
+          <div class="c-label">Hours</div>
+          <div class="c-val">Monday – Saturday<br>9:00 AM – 8:00 PM</div>
+        </div>
+      </div>
+      <a href="https://wa.me/919751688911?text=Hi%20Golden%20Tailors!%20I'd%20like%20to%20book%20an%20appointment." target="_blank" class="wa-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#4ade80"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.526 5.847L.057 23.487l5.784-1.517A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 01-5.002-1.368l-.359-.214-3.435.9.917-3.346-.234-.374A9.817 9.817 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+        Chat on WhatsApp
+      </a>
+    </div>
+    <div class="booking-right">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Your name</label>
+          <input type="text" id="f-name" placeholder="Full name"/>
+        </div>
+        <div class="form-group">
+          <label>Phone number</label>
+          <input type="tel" id="f-phone" placeholder="+91 XXXXX XXXXX"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Service required</label>
+        <select id="f-service">
+          <option value="">Select a service</option>
+          <option>Custom stitching</option>
+          <option>Embroidery</option>
+          <option>Alteration / repair</option>
+          <option>Bridal & special wear</option>
+          <option>Uniform / bulk order</option>
+          <option>Designer design</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Preferred date</label>
+          <input type="date" id="f-date"/>
+        </div>
+        <div class="form-group">
+          <label>Preferred time</label>
+          <select id="f-time">
+            <option value="">Select time</option>
+            <option>9:00 AM</option><option>10:00 AM</option>
+            <option>11:00 AM</option><option>12:00 PM</option>
+            <option>2:00 PM</option><option>3:00 PM</option>
+            <option>4:00 PM</option><option>5:00 PM</option>
+            <option>6:00 PM</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Notes (optional)</label>
+        <textarea id="f-notes" rows="3" placeholder="Describe your requirements..."></textarea>
+      </div>
+      <button class="submit-btn" onclick="handleBook()">Confirm appointment</button>
+      <div class="form-msg" id="form-msg"></div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews" id="reviews">
+  <div class="s-eyebrow"><div class="line"></div><span>What people say</span></div>
+  <div class="s-title">Customer <em>reviews</em></div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-quote">"</div>
+      <div class="stars">★★★★★</div>
+      <p>The embroidery on my wedding lehenga was absolutely stunning. Golden Tailors exceeded all my expectations!</p>
+      <div class="review-name">Priya Rajan</div>
+      <div class="review-loc">Karamadai</div>
+    </div>
+    <div class="review-card">
+      <div class="review-quote">"</div>
+      <div class="stars">★★★★★</div>
+      <p>Got our school uniform stitched for 50 students. Perfect fit, delivered on time and at a very reasonable price.</p>
+      <div class="review-name">Karthik S.</div>
+      <div class="review-loc">Coimbatore</div>
+    </div>
+    <div class="review-card">
+      <div class="review-quote">"</div>
+      <div class="stars">★★★★★</div>
+      <p>Quick alteration done in just one day. Excellent stitching quality and they really listen to what you want.</p>
+      <div class="review-name">Meena Devi</div>
+      <div class="review-loc">Mettupalayam</div>
+    </div>
+  </div>
+</section>
+
+<!-- FIND US -->
+<section class="find-us" id="find-us">
+  <div class="s-eyebrow" style="justify-content:center;"><div class="line"></div><span>Find us online</span><div class="line"></div></div>
+  <div class="s-title" style="text-align:center;">Follow us &amp; <em>get directions</em></div>
+  <p>See our latest work on Instagram or get directions to our shop in Karamadai.</p>
+  <div class="social-btns">
+    <a href="https://instagram.com/golden_tailor_tn43" target="_blank" class="s-btn s-btn-ig">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+      @golden_tailor_tn43
+    </a>
+    <a href="https://maps.google.com/?q=7X86+55+Karamadai,+Tamil+Nadu" target="_blank" class="s-btn s-btn-map">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
+      Get directions
+    </a>
+    <a href="tel:+919751688911" class="s-btn s-btn-call">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+      +91 97516 88911
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo">Golden Tailors</div>
+      <div class="footer-logo-sub">Est. Karamadai, Tamil Nadu</div>
+      <p>Precision tailoring, timeless style.<br>Mullai Garden, Karamadai, Coimbatore – 641104.<br>Serving Tamil Nadu with pride for 20+ years.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <a href="#services">Custom stitching</a>
+      <a href="#services">Embroidery</a>
+      <a href="#services">Bridal wear</a>
+      <a href="#services">Alterations</a>
+      <a href="#services">Bulk orders</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <a href="tel:+919751688911">+91 97516 88911</a>
+      <a href="https://wa.me/919751688911" target="_blank">WhatsApp</a>
+      <a href="https://instagram.com/golden_tailor_tn43" target="_blank">Instagram</a>
+      <a href="https://maps.google.com/?q=7X86+55+Karamadai,+Tamil+Nadu" target="_blank">Google Maps</a>
+    </div>
+    <div class="footer-col">
+      <h4>Hours</h4>
+      <a>Monday – Friday</a>
+      <a>9:00 AM – 8:00 PM</a>
+      <a>Saturday</a>
+      <a>9:00 AM – 8:00 PM</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Golden Tailors. All rights reserved.</p>
+    <p>Karamadai, Coimbatore, Tamil Nadu.</p>
+  </div>
+</footer>
+
+<script>
+function handleBook() {
+  const name    = document.getElementById('f-name').value.trim();
+  const phone   = document.getElementById('f-phone').value.trim();
+  const service = document.getElementById('f-service').value;
+  const date    = document.getElementById('f-date').value;
+  const time    = document.getElementById('f-time').value;
+  const notes   = document.getElementById('f-notes').value.trim();
+  const msg     = document.getElementById('form-msg');
+
+  if (!name || !phone || !service || !date || !time) {
+    msg.style.display = 'block';
+    msg.style.background = 'rgba(224,76,76,0.12)';
+    msg.style.border = '1px solid rgba(224,76,76,0.3)';
+    msg.style.color = '#f87171';
+    msg.textContent = 'Please fill in all required fields.';
+    return;
+  }
+  msg.style.display = 'block';
+  msg.style.background = 'rgba(200,169,81,0.1)';
+  msg.style.border = '1px solid rgba(200,169,81,0.3)';
+  msg.style.color = '#C8A951';
+  msg.textContent = 'Appointment request received! We will call you shortly to confirm.';
+
+  let waText = `Hi Golden Tailors! I'd like to book an appointment.\nName: ${name}\nPhone: ${phone}\nService: ${service}\nDate: ${date} at ${time}`;
+  if (notes) waText += `\nNotes: ${notes}`;
+  setTimeout(() => {
+    window.open('https://wa.me/919751688911?text=' + encodeURIComponent(waText), '_blank');
+  }, 800);
+}
+</script>
+</body>
+</html>
